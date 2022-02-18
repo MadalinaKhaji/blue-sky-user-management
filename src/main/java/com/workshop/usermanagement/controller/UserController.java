@@ -4,6 +4,8 @@ import com.workshop.usermanagement.dto.UserDto;
 import com.workshop.usermanagement.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -22,5 +24,20 @@ public class UserController {
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable Integer id) {
         return userService.getUser(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id);
+    }
+
+    @PatchMapping
+    public UserDto updateUser(@RequestBody UserDto userDto) {
+        return userService.updateUser(userDto);
+    }
+
+    @GetMapping("/all")
+    public List<UserDto> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
