@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private UserService userService;
@@ -39,5 +39,10 @@ public class UserController {
     @GetMapping("/all")
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/all/{ids}")
+    public List<UserDto> getUsersByIds(@PathVariable List<Integer> ids) {
+        return userService.getUsersByIds(ids);
     }
 }

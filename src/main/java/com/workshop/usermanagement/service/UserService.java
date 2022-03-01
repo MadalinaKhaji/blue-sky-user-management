@@ -7,7 +7,6 @@ import com.workshop.usermanagement.entity.UserEntity;
 import com.workshop.usermanagement.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,11 +46,14 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers() {
-        List<UserEntity> userEntityList = new ArrayList<>();
+        return userRepository.findAll()
+                .stream()
+                .map(userEntity -> mapper.map(userEntity, UserDto.class))
+                .collect(Collectors.toList());
+    }
 
-        userRepository.findAll().forEach((userEntity -> userEntityList.add(userEntity)));
-
-        return userEntityList
+    public List<UserDto> getUsersByIds(List<Integer> userIds) {
+        return userRepository.findAllById(userIds)
                 .stream()
                 .map(userEntity -> mapper.map(userEntity, UserDto.class))
                 .collect(Collectors.toList());
