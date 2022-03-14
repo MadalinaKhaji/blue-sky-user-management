@@ -31,7 +31,7 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PatchMapping
+    @PutMapping
     public UserDto updateUser(@RequestBody UserDto userDto) {
         return userService.updateUser(userDto);
     }
